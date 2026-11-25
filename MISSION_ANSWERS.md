@@ -232,6 +232,51 @@ Server: nginx
 
 Nhận xét từ code: `main.py` chưa dùng Redis hay Qdrant dù compose khai báo; ghi chú đầu file nói agent có 2 replicas nhưng thực tế chỉ chạy 1 container.
 
+## Part 3: Cloud Deployment
+
+### Exercise 3.1: Deploy Railway
+
+- **URL:** https://day14-agent-production-43e12fb4.up.railway.app
+- **Nội dung deploy:** agent Part 6 (`06-lab-complete/`) và một service Redis. Các bước và biến môi trường: [DEPLOYMENT.md](DEPLOYMENT.md).
+- **Screenshot:** [dashboard](screenshots/dashboard.png), [running](screenshots/running.png), [test](screenshots/test.png)
+
+Bốn lệnh tự kiểm ở CP6:
+
+| Request | Mã HTTP |
+|---|---|
+| `GET /health` | 200 |
+| `GET /ready` | 200 |
+| `POST /ask` không có key | 401 |
+| `POST /ask` có key | 200 |
+
+`python check_production_ready.py --public-url <URL>`: PASS 12/12, 44/44 checks.
+
+### Exercise 3.2: So sánh `railway.toml` và `render.yaml` (`06-lab-complete/`)
+
+Chỉ deploy lên Railway; `render.yaml` được viết và đạt kiểm tra của script nhưng chưa chạy trên Render.
+
+| Điểm so sánh | `railway.toml` | `render.yaml` | Vì sao khác |
+|---|---|---|---|
+| Định dạng | TOML, mục `[build]` và `[deploy]` | YAML, danh sách `services` | Hai nền tảng dùng chuẩn cấu hình riêng |
+| Phạm vi | Cách build và chạy **một** service | Blueprint mô tả **nhiều** tài nguyên: web và Key Value (Redis) | Ở Railway, Redis được thêm bằng lệnh `railway add`, nằm ngoài file |
+| Build | `builder = "DOCKERFILE"`, `dockerfilePath` | `runtime: docker`, `rootDir: 06-lab-complete` | Railway deploy từ thư mục đang đứng; Render đọc cả repo nên phải chỉ thư mục con |
+| Health check | `healthcheckPath = "/health"`, timeout 100 giây | `healthCheckPath: /health` | Cùng mục đích, khác cách viết |
+| Khi app crash | `restartPolicyType = "ON_FAILURE"`, tối đa 3 lần | Không khai báo | Render tự quản lý việc khởi động lại |
+| Biến môi trường | Không khai báo trong file, đặt bằng CLI hoặc dashboard | Khai báo trong `envVars` | Railway tách cấu hình biến khỏi file deploy |
+| Secret | Đặt `AGENT_API_KEY` trên nền tảng | `generateValue: true`, Render tự sinh | Cả hai đều không ghi giá trị vào repo |
+| Nối Redis | `REDIS_URL=${{ Redis.REDIS_URL }}` đặt trên nền tảng | `fromService` lấy `connectionString` | Hai cách tham chiếu service khác |
+| Gói dịch vụ | Không khai báo | `plan: free` | Render chọn gói trong Blueprint |
+
+File mẫu trong `03-cloud-deployment/` thì khác: `railway.toml` mẫu dùng `NIXPACKS` với `startCommand`, `render.yaml` mẫu dùng `runtime: python` với `buildCommand`. Bài này dùng Dockerfile để chạy trên cloud giống hệt ở local. Railway CLI hiện cảnh báo `railway.toml` đã deprecated và chỉ còn dùng được đến 2026-12-01.
+
+### Exercise 3.3: Pipeline Cloud Run
+
+1. `cloudbuild.yaml` chạy bốn bước nối tiếp: **test** (`pytest tests/`) → **build** image (gắn tag `$COMMIT_SHA` và `latest`, dùng cache từ `latest`) → **push** lên Container Registry → **deploy** lên Cloud Run ở `asia-southeast1`.
+2. `waitFor` khiến bước sau chỉ chạy khi bước trước thành công, nên test lỗi thì không deploy.
+3. Bước deploy đặt 1–10 instance, 512Mi RAM, 1 CPU, timeout 60 giây và lấy `OPENAI_API_KEY` từ Secret Manager.
+4. `service.yaml` mô tả cùng service dưới dạng code: concurrency 80, `AGENT_API_KEY` từ Secret Manager, `livenessProbe` gọi `/health`, `startupProbe` gọi `/ready`.
+5. Muốn chạy thật cần bổ sung: thư mục chưa có `tests/`, và cần tạo trước các secret trong Secret Manager.
+
 ## Part 4: API Security
 
 Token JWT trong các output được thay bằng `<TOKEN>`; một số header HTTP được lược bớt cho gọn.
@@ -631,3 +676,4 @@ Hạn chế: cost guard kiểm tra trước rồi mới cộng chi phí, nên nh
 | Nhờ AI hỗ trợ CP3 | AI hỗ trợ kiểm thử, viết hàm cost guard và soạn bản nháp Part 4 | Tôi tự chạy lại vòng lặp curl của Exercise 4.3 theo hướng dẫn của Claude Code: request 1–10 trả 200, request 11–20 trả 429 |
 | Nhờ AI hỗ trợ CP4 | AI hỗ trợ kiểm thử và soạn bản nháp Part 5 | Tôi tự chạy stack 3 agent và `test_stateless.py` theo hướng dẫn của Claude Code: 5 request do 3 instance xử lý, lịch sử đủ 10 message, sau đó tắt stack |
 | Nhờ AI hỗ trợ CP5 | AI hỗ trợ viết code trong `06-lab-complete/`, kiểm thử và soạn bản nháp Part 6 | Tôi tự chạy `python check_production_ready.py` (đầy đủ, có Docker): PASS 12/12, 43/43 checks, image 184 MB |
+| Nhờ AI hỗ trợ CP6 | AI hỗ trợ hướng dẫn deploy Railway, kiểm tra URL và soạn bản nháp Part 3, `DEPLOYMENT.md` | Tôi tự deploy lên Railway theo hướng dẫn và chạy 4 lệnh kiểm tra: 200, 200, 401, 200 |
