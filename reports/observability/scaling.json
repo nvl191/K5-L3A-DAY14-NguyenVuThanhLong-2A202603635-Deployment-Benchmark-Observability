@@ -1,0 +1,78 @@
+{
+  "scale_1": {
+    "locust_exit_code": 1,
+    "mid_run": {
+      "at": "2026-11-25T10:25:19+00:00",
+      "rps": 61.73,
+      "error_rate": 0.0106,
+      "p50_s": 0.178,
+      "p95_s": 0.2945,
+      "p99_s": 1.8383,
+      "avg_s": 0.2365,
+      "llm_p95_s": 0.1981,
+      "in_flight": 16.0,
+      "instances_up": 1.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 61.7273
+      },
+      "tokens_per_s": {
+        "input": 4733.6364,
+        "output": 2477.0545
+      },
+      "cost_usd_per_hour_5m": 2.054,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 1.0
+      },
+      "docker_stats": [
+        "k5-day14-observability-locust-run-0fd5bcefd77d 11.89% 49.82MiB / 7.651GiB",
+        "k5-day14-observability-agent-1 22.17% 60.5MiB / 256MiB",
+        "k5-day14-observability-locust-1 0.00% 43.03MiB / 7.651GiB",
+        "k5-day14-observability-nginx-1 1.92% 4.918MiB / 7.651GiB",
+        "k5-day14-observability-grafana-1 1.16% 366.9MiB / 7.651GiB",
+        "k5-day14-observability-prometheus-1 0.46% 54.75MiB / 7.651GiB",
+        "k5-day14-observability-jaeger-1 0.10% 52.16MiB / 7.651GiB"
+      ]
+    }
+  },
+  "scale_3": {
+    "locust_exit_code": 1,
+    "mid_run": {
+      "at": "2026-11-25T10:27:44+00:00",
+      "rps": 61.14,
+      "error_rate": 0.0068,
+      "p50_s": 0.1778,
+      "p95_s": 0.2959,
+      "p99_s": 1.8621,
+      "avg_s": 0.244,
+      "llm_p95_s": 0.1986,
+      "in_flight": 20.0,
+      "instances_up": 3.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 20.328,
+        "172.21.0.9:8000": 20.4349,
+        "172.21.0.8:8000": 20.4
+      },
+      "tokens_per_s": {
+        "input": 4718.4691,
+        "output": 2472.733
+      },
+      "cost_usd_per_hour_5m": 5.106,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 3.0
+      },
+      "docker_stats": [
+        "k5-day14-observability-locust-run-44c0444f2635 13.49% 49.43MiB / 7.651GiB",
+        "k5-day14-observability-agent-2 8.10% 55.88MiB / 256MiB",
+        "k5-day14-observability-agent-3 7.78% 56.16MiB / 256MiB",
+        "k5-day14-observability-agent-1 7.20% 60.51MiB / 256MiB",
+        "k5-day14-observability-locust-1 0.00% 43.03MiB / 7.651GiB",
+        "k5-day14-observability-nginx-1 2.43% 5.043MiB / 7.651GiB",
+        "k5-day14-observability-grafana-1 1.21% 373.9MiB / 7.651GiB",
+        "k5-day14-observability-prometheus-1 0.22% 60.55MiB / 7.651GiB",
+        "k5-day14-observability-jaeger-1 0.09% 83.8MiB / 7.651GiB"
+      ]
+    }
+  }
+}

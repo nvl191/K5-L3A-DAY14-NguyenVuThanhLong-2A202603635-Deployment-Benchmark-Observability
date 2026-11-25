@@ -1,0 +1,176 @@
+{
+  "since": "2026-11-25T10:50:01Z",
+  "collected": "2026-11-25T10:53:04+00:00",
+  "alerts": {
+    "AgentHighErrorRate": "firing",
+    "AgentHighLatencyP95": "firing",
+    "LLMCostBurnRateHigh": "firing"
+  },
+  "both_firing": true,
+  "panels": {
+    "at": "2026-11-25T10:53:04+00:00",
+    "rps": 7.51,
+    "error_rate": 0.1985,
+    "p50_s": 0.2066,
+    "p95_s": 1.9044,
+    "p99_s": 1.9809,
+    "avg_s": 0.6077,
+    "llm_p95_s": 1.9234,
+    "in_flight": 6.0,
+    "instances_up": 2.0,
+    "rps_by_instance": {
+      "172.21.0.5:8000": 3.8184,
+      "172.21.0.8:8000": 3.6908
+    },
+    "tokens_per_s": {
+      "input": 467.1147,
+      "output": 244.7485
+    },
+    "cost_usd_per_hour_5m": 6.325,
+    "retrieval_hit_ratio_1m": 1.0,
+    "agent_info": {
+      "v2/mock-llm-small": 2.0
+    }
+  },
+  "slow_trace": {
+    "trace_id": "eebf2cc2c538b6de05cfb1adfe78c1cc",
+    "url": "http://localhost:16686/trace/eebf2cc2c538b6de05cfb1adfe78c1cc",
+    "total_ms": 1719.9,
+    "spans": [
+      {
+        "name": "POST /ask",
+        "ms": 1719.9,
+        "percent": 100.0,
+        "status": {},
+        "events": []
+      },
+      {
+        "name": "agent.run",
+        "ms": 1716.9,
+        "percent": 99.8,
+        "status": {},
+        "events": []
+      },
+      {
+        "name": "agent.retrieve_context",
+        "ms": 19.3,
+        "percent": 1.1,
+        "status": {},
+        "events": []
+      },
+      {
+        "name": "chat mock-llm-small",
+        "ms": 1697.1,
+        "percent": 98.7,
+        "status": {},
+        "events": []
+      }
+    ],
+    "log_lines": [
+      {
+        "ts": "2026-11-25T10:52:53.425299+00:00",
+        "level": "INFO",
+        "service": "observable-agent",
+        "instance": "46cc3fe0dc4d",
+        "event": "llm_call",
+        "trace_id": "eebf2cc2c538b6de05cfb1adfe78c1cc",
+        "span_id": "9a0297edb930bda3",
+        "request_id": "76cfca063805",
+        "model": "mock-llm-small",
+        "agent_version": "v2",
+        "input_tokens": 95,
+        "output_tokens": 55,
+        "cost_usd": 4.7e-05,
+        "llm_ms": 1696.9
+      },
+      {
+        "ts": "2026-11-25T10:52:53.426134+00:00",
+        "level": "INFO",
+        "service": "observable-agent",
+        "instance": "46cc3fe0dc4d",
+        "event": "http_request",
+        "trace_id": "eebf2cc2c538b6de05cfb1adfe78c1cc",
+        "span_id": "9a0297edb930bda3",
+        "request_id": "76cfca063805",
+        "method": "POST",
+        "route": "/ask",
+        "status": 200,
+        "ms": 1719.1
+      }
+    ]
+  },
+  "error_trace": {
+    "trace_id": "78c3aa08c8e6a87464d29e078ab21a6a",
+    "url": "http://localhost:16686/trace/78c3aa08c8e6a87464d29e078ab21a6a",
+    "total_ms": 109.4,
+    "spans": [
+      {
+        "name": "POST /ask",
+        "ms": 109.4,
+        "percent": 100.0,
+        "status": {
+          "code": 2
+        },
+        "events": []
+      },
+      {
+        "name": "agent.run",
+        "ms": 107.7,
+        "percent": 98.4,
+        "status": {
+          "message": "LLMError: Upstream LLM error: 503 Service Unavailable (mock)",
+          "code": 2
+        },
+        "events": [
+          "exception"
+        ]
+      },
+      {
+        "name": "agent.retrieve_context",
+        "ms": 17.2,
+        "percent": 15.7,
+        "status": {},
+        "events": []
+      },
+      {
+        "name": "chat mock-llm-small",
+        "ms": 90.0,
+        "percent": 82.3,
+        "status": {
+          "message": "LLMError: Upstream LLM error: 503 Service Unavailable (mock)",
+          "code": 2
+        },
+        "events": [
+          "exception"
+        ]
+      }
+    ],
+    "log_lines": [
+      {
+        "ts": "2026-11-25T10:52:55.627225+00:00",
+        "level": "INFO",
+        "service": "observable-agent",
+        "instance": "af4339e560b3",
+        "event": "llm_error",
+        "trace_id": "78c3aa08c8e6a87464d29e078ab21a6a",
+        "span_id": "a899de02dab54ede",
+        "request_id": "008dba8184e3",
+        "error": "Upstream LLM error: 503 Service Unavailable (mock)"
+      },
+      {
+        "ts": "2026-11-25T10:52:55.627610+00:00",
+        "level": "INFO",
+        "service": "observable-agent",
+        "instance": "af4339e560b3",
+        "event": "http_request",
+        "trace_id": "78c3aa08c8e6a87464d29e078ab21a6a",
+        "span_id": "a899de02dab54ede",
+        "request_id": "008dba8184e3",
+        "method": "POST",
+        "route": "/ask",
+        "status": 503,
+        "ms": 108.9
+      }
+    ]
+  }
+}

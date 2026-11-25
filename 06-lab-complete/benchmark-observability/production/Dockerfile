@@ -29,6 +29,8 @@ ENV PATH=/home/agent/.local/bin:$PATH
 ENV PYTHONPATH=/app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+# Home của user agent là /app, nên phải chỉ rõ nơi chứa package cài bằng --user
+ENV PYTHONUSERBASE=/home/agent/.local
 
 EXPOSE 8000
 

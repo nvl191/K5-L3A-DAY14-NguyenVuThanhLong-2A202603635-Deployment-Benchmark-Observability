@@ -1,0 +1,241 @@
+{
+  "baseline": {
+    "at": "2026-11-25T10:34:36+00:00",
+    "rps": 9.31,
+    "error_rate": 0.0098,
+    "p50_s": 0.188,
+    "p95_s": 0.2963,
+    "p99_s": 1.8578,
+    "avg_s": 0.2467,
+    "llm_p95_s": 0.1985,
+    "in_flight": 2.0,
+    "instances_up": 2.0,
+    "rps_by_instance": {
+      "172.21.0.5:8000": 4.673,
+      "172.21.0.8:8000": 4.6364
+    },
+    "tokens_per_s": {
+      "input": 712.7284,
+      "output": 373.6282
+    },
+    "cost_usd_per_hour_5m": 0.777,
+    "retrieval_hit_ratio_1m": 1.0,
+    "agent_info": {
+      "v2/mock-llm-small": 2.0
+    },
+    "alerts": {},
+    "locust_users": 15,
+    "nginx_metrics_status": "404",
+    "eval_v2": {
+      "exit_code": 0,
+      "accuracy": 1.0,
+      "passed": 23,
+      "total": 23
+    }
+  },
+  "A": {
+    "change": "MOCK_ERROR_RATE=0.2",
+    "started": "2026-11-25T10:34:40+00:00",
+    "expected_alert": "AgentHighErrorRate",
+    "alert_timeline_s": {
+      "AgentInstanceDown:pending": 8.0,
+      "AgentHighErrorRate:pending": 28.1,
+      "AgentHighErrorRate:firing": 88.5
+    },
+    "seconds_to_firing": 88.5,
+    "panels": {
+      "at": "2026-11-25T10:36:09+00:00",
+      "rps": 9.55,
+      "error_rate": 0.2038,
+      "p50_s": 0.1743,
+      "p95_s": 0.2936,
+      "p99_s": 1.7375,
+      "avg_s": 0.2146,
+      "llm_p95_s": 0.1973,
+      "in_flight": 1.0,
+      "instances_up": 2.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 4.6909,
+        "172.21.0.8:8000": 4.8545
+      },
+      "tokens_per_s": {
+        "input": 591.0545,
+        "output": 309.9636
+      },
+      "cost_usd_per_hour_5m": 1.045,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 2.0
+      }
+    }
+  },
+  "B": {
+    "change": "MOCK_SLOW_RATE=0.3",
+    "started": "2026-11-25T10:37:35+00:00",
+    "expected_alert": "AgentHighLatencyP95",
+    "alert_timeline_s": {
+      "AgentHighLatencyP95:pending": 22.7,
+      "AgentHighLatencyP95:firing": 143.3
+    },
+    "seconds_to_firing": 143.3,
+    "panels": {
+      "at": "2026-11-25T10:39:58+00:00",
+      "rps": 7.29,
+      "error_rate": 0.005,
+      "p50_s": 0.2223,
+      "p95_s": 1.9217,
+      "p99_s": 1.9843,
+      "avg_s": 0.673,
+      "llm_p95_s": 1.9221,
+      "in_flight": 6.0,
+      "instances_up": 2.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 3.6,
+        "172.21.0.8:8000": 3.6906
+      },
+      "tokens_per_s": {
+        "input": 563.0702,
+        "output": 295.8074
+      },
+      "cost_usd_per_hour_5m": 0.944,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 2.0
+      }
+    }
+  },
+  "D": {
+    "change": "docker pause 1 instance",
+    "started": "2026-11-25T10:41:25+00:00",
+    "expected_alert": "AgentInstanceDown",
+    "alert_timeline_s": {
+      "AgentInstanceDown:pending": 14.1,
+      "AgentInstanceDown:firing": 42.3
+    },
+    "seconds_to_firing": 42.3,
+    "panels": {
+      "at": "2026-11-25T10:42:07+00:00",
+      "rps": 6.88,
+      "error_rate": 0.0132,
+      "p50_s": 0.181,
+      "p95_s": 0.2936,
+      "p99_s": 1.8161,
+      "avg_s": 0.2332,
+      "llm_p95_s": 0.1977,
+      "in_flight": 0.0,
+      "instances_up": 1.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 1.3103,
+        "172.21.0.8:8000": 5.5634
+      },
+      "tokens_per_s": {
+        "input": 521.8744,
+        "output": 273.3188
+      },
+      "cost_usd_per_hour_5m": 0.908,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 1.0
+      }
+    },
+    "panels_30s_after_firing": {
+      "at": "2026-11-25T10:42:37+00:00",
+      "rps": 8.27,
+      "error_rate": 0.0176,
+      "p50_s": 0.1878,
+      "p95_s": 0.2947,
+      "p99_s": 1.825,
+      "avg_s": 0.2354,
+      "llm_p95_s": 0.1978,
+      "in_flight": 4.0,
+      "instances_up": 1.0,
+      "rps_by_instance": {
+        "172.21.0.8:8000": 8.2723
+      },
+      "tokens_per_s": {
+        "input": 631.8201,
+        "output": 332.8909
+      },
+      "cost_usd_per_hour_5m": 0.912,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-small": 1.0
+      }
+    },
+    "nginx_504_count": 16
+  },
+  "E": {
+    "change": "AGENT_VERSION=v1",
+    "started": "2026-11-25T10:42:45+00:00",
+    "expected_alert": null,
+    "alert_timeline_s": {},
+    "seconds_to_firing": null,
+    "panels": {
+      "at": "2026-11-25T10:46:47+00:00",
+      "rps": 9.53,
+      "error_rate": 0.0115,
+      "p50_s": 0.1511,
+      "p95_s": 0.198,
+      "p99_s": 1.8253,
+      "avg_s": 0.2064,
+      "llm_p95_s": 0.1978,
+      "in_flight": 0.0,
+      "instances_up": 2.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 4.8002,
+        "172.21.0.8:8000": 4.7272
+      },
+      "tokens_per_s": {
+        "input": 344.6214,
+        "output": 187.3835
+      },
+      "cost_usd_per_hour_5m": 0.662,
+      "retrieval_hit_ratio_1m": null,
+      "agent_info": {
+        "v1/mock-llm-small": 2.0
+      }
+    },
+    "eval_v1": {
+      "exit_code": 1,
+      "accuracy": 0.0435,
+      "passed": 1,
+      "total": 23
+    }
+  },
+  "C": {
+    "change": "LLM_MODEL=mock-llm-large",
+    "started": "2026-11-25T10:47:06+00:00",
+    "expected_alert": "LLMCostBurnRateHigh",
+    "alert_timeline_s": {
+      "AgentInstanceDown:pending": 7.1,
+      "LLMCostBurnRateHigh:pending": 43.3,
+      "LLMCostBurnRateHigh:firing": 161.9
+    },
+    "seconds_to_firing": 161.9,
+    "panels": {
+      "at": "2026-11-25T10:49:48+00:00",
+      "rps": 7.65,
+      "error_rate": 0.0048,
+      "p50_s": 0.4177,
+      "p95_s": 0.7334,
+      "p99_s": 1.9263,
+      "avg_s": 0.5029,
+      "llm_p95_s": 0.498,
+      "in_flight": 2.0,
+      "instances_up": 2.0,
+      "rps_by_instance": {
+        "172.21.0.5:8000": 3.8727,
+        "172.21.0.8:8000": 3.7816
+      },
+      "tokens_per_s": {
+        "input": 590.015,
+        "output": 308.2616
+      },
+      "cost_usd_per_hour_5m": 8.687,
+      "retrieval_hit_ratio_1m": 1.0,
+      "agent_info": {
+        "v2/mock-llm-large": 2.0
+      }
+    }
+  }
+}

@@ -678,3 +678,4 @@ Hạn chế: cost guard kiểm tra trước rồi mới cộng chi phí, nên nh
 | Nhờ AI hỗ trợ CP5 | AI hỗ trợ viết code trong `06-lab-complete/`, kiểm thử và soạn bản nháp Part 6 | Tôi tự chạy `python check_production_ready.py` (đầy đủ, có Docker): PASS 12/12, 43/43 checks, image 184 MB |
 | Nhờ AI hỗ trợ CP6 | AI hỗ trợ hướng dẫn deploy Railway, kiểm tra URL và soạn bản nháp Part 3, `DEPLOYMENT.md` | Tôi tự deploy lên Railway theo hướng dẫn và chạy 4 lệnh kiểm tra: 200, 200, 401, 200 |
 | Nhờ AI hỗ trợ CP7 | AI hỗ trợ thêm metric, chạy load test và eval, bổ sung `KNOWLEDGE_BASE` và soạn bản nháp `BENCHMARK_REPORT.md` | Tôi tự chạy lại eval cuối trên agent v2: 23/23, không regression, quality gate PASS |
+| Nhờ AI hỗ trợ CP8 | AI hỗ trợ sửa `production/Dockerfile`, chạy Locust và các thí nghiệm gây lỗi, thu trace và soạn bản nháp mục 4–6 `BENCHMARK_REPORT.md` | Tôi tự chụp ảnh dashboard Grafana, hai trace Jaeger và trang Alerts của Prometheus theo hướng dẫn |
